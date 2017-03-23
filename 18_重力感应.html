@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<meta name="viewport" content="width=device-width,user-scalable=no">
+<style type="text/css">
+body,
+html {
+	margin: 0;
+	height: 100%;
+	-webkit-perspective: 200px;
+	perspective: 200px;
+	background: url(img_bg_level_1.jpg) center center no-repeat;
+	background-size: cover;
+
+}
+#box {
+	width: 50px;
+	height: 50px;
+	background: url(plane.png) no-repeat center center;
+	background-size: cover;
+	font-size: 20px;
+	color: #fff;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -25px 0 0 -25px;
+	transition: .2s;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+</style>
+
+</head>
+<body>
+<div id="box"></div>
+<script type="text/javascript" src="m.touch.js"></script>
+<script type="text/javascript">
+var box = document.querySelector("#box");
+css(box,"translateZ",1);
+css(box,"translateX",0);
+css(box,"rotateY",0);
+MSetGravity(
+	function(e) {
+		var deg = e.gamma;
+		var startX = css(box,"translateX")
+		var x = e.x + startX;
+		if(Math.abs(deg) > 45) {
+			deg = deg/Math.abs(deg)*45;
+		}
+		css(box,"translateX",x);
+		css(box,"rotateY",deg);
+	}
+);
+</script>
+</body>
+</html>
